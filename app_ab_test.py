@@ -111,10 +111,10 @@ plt.tight_layout()
 
 df_repartitions = pd.DataFrame(
     {
-        "centile": CENTILES_TO_COMPUTE,
-        "conversion_rate_a": np.percentile(samples_conversion_rate_a, CENTILES_TO_COMPUTE),
-        "conversion_rate_b": np.percentile(samples_conversion_rate_b, CENTILES_TO_COMPUTE),
-        "diff_conversion_rate_a_minus_b": np.percentile(diff, CENTILES_TO_COMPUTE),
+        "Centile": CENTILES_TO_COMPUTE,
+        "Conversion rate A (%)": np.percentile(samples_conversion_rate_a, CENTILES_TO_COMPUTE),
+        "Conversion rate B (%)": np.percentile(samples_conversion_rate_b, CENTILES_TO_COMPUTE),
+        "Diff conversion rate A minus B (%)": np.percentile(diff, CENTILES_TO_COMPUTE),
     }
 )
 
@@ -130,7 +130,7 @@ summary = f"""
 - Difference in conversion rate: {converted_a / nb_a - converted_b / nb_b:.1%} 
 
 #### Estimation of variability
-- Probability of group A's conversion rate being higher than group B's conversion rate: {(diff > 0).mean():.1f}%
+- Probability of group A's conversion rate being higher than group B's conversion rate: {(diff > 0).mean():.1%}
 - There is 90% chances that group A's conversion rate minus groupb B's conversion high is higher than {np.percentile(diff, 10):.1f}%
 - There is 95% chances that group A's conversion rate minus groupb B's conversion high is higher than {np.percentile(diff, 5):.1f}%
 - There is 99% chances that group A's conversion rate minus groupb B's conversion high is higher than {np.percentile(diff, 1):.1f}%
@@ -138,6 +138,6 @@ summary = f"""
 
 st.markdown(summary)
 st.subheader("Conversion rates by centile")
-st.dataframe(df_repartitions.round(1))
+st.dataframe(df_repartitions.set_index("Centile").round(1))
 st.subheader("Parameters' distribution")
 st.pyplot(fig)
