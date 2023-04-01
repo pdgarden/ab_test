@@ -64,7 +64,7 @@ converted_a = st.sidebar.number_input(
 converted_b = st.sidebar.number_input(
     "Number of samples converted in group B",
     min_value=0,
-    max_value=nb_a,
+    max_value=nb_b,
     value=DEFAULT_INPUT["converted_b"],
 )
 
