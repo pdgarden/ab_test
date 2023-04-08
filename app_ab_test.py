@@ -42,16 +42,12 @@ sns.set()
 # -------------------------------------------------------------------------------------------------------------------- #
 # App
 
+st.sidebar.header("Group A")
+
 nb_a = st.sidebar.number_input(
     "Number of samples in group A",
     min_value=0,
     value=DEFAULT_INPUT["nb_a"],
-    step=1,
-)
-nb_b = st.sidebar.number_input(
-    "Number of samples in group B",
-    min_value=0,
-    value=DEFAULT_INPUT["nb_b"],
     step=1,
 )
 
@@ -61,12 +57,24 @@ converted_a = st.sidebar.number_input(
     max_value=nb_a,
     value=DEFAULT_INPUT["converted_a"],
 )
+
+
+st.sidebar.header("Group B")
+
+nb_b = st.sidebar.number_input(
+    "Number of samples in group B",
+    min_value=0,
+    value=DEFAULT_INPUT["nb_b"],
+    step=1,
+)
+
 converted_b = st.sidebar.number_input(
     "Number of samples converted in group B",
     min_value=0,
     max_value=nb_b,
     value=DEFAULT_INPUT["converted_b"],
 )
+
 
 # Simulate draws
 samples_conversion_rate_a = np.random.beta(
