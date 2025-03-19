@@ -17,14 +17,11 @@ Web interface based on Streamlit used to estimate variability of AB test on bina
    1. Setup pre-commit: `uv run pre-commit install -t commit-msg -t pre-commit`
 
 
-```shell
-pip install -r requirements.txt
-```
 
 ### Run
 
 ```shell
-streamlit run app_ab_test.py.py
+uv run streamlit run app_ab_test.py
 ```
 
 
