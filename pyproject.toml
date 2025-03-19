@@ -11,3 +11,15 @@ dev = [
     "pre-commit>=4.2.0",
     "ruff>=0.11.0",
 ]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+preview = true
+extend-select = [
+    'E', 'F', 'W', 'C90', 'A', 'ANN', 'S', 'B', 'PT', 'Q', 'RSE', 'SIM', 'ARG', 'PTH', 'PD',
+    'TRY', 'FLY', 'NPY', 'PLC', 'PLE', 'PLW', 'I',
+    ]
+ignore = ['S608', 'ANN401']
