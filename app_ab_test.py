@@ -5,11 +5,11 @@ App to get insights about ab test on binary outcome leveraging bayesian statisti
 # -------------------------------------------------------------------------------------------------------------------- #
 # Imports
 
-import streamlit as st
-import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+import numpy as np
 import pandas as pd
+import seaborn as sns
+import streamlit as st
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Constants
@@ -35,8 +35,9 @@ SEED = 42
 # Config
 
 st.set_page_config(page_title="AB Test", layout="wide")
-np.random.seed(SEED)
-sns.set()
+
+rng = np.random.default_rng(SEED)
+sns.set_theme()
 
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -77,13 +78,13 @@ converted_b = st.sidebar.number_input(
 
 
 # Simulate draws
-samples_conversion_rate_a = np.random.beta(
+samples_conversion_rate_a = rng.beta(
     a=PRIOR_A + converted_a,
     b=PRIOR_B + nb_a - converted_a,
     size=OUTPUT_SAMPLE_SIZE,
 )
 
-samples_conversion_rate_b = np.random.beta(
+samples_conversion_rate_b = rng.beta(
     a=PRIOR_B + converted_b,
     b=PRIOR_B + nb_b - converted_b,
     size=OUTPUT_SAMPLE_SIZE,
@@ -135,14 +136,16 @@ summary = f"""
 #### Observed:
 - Conversion rate (group A): {converted_a / nb_a:.1%}
 - Conversion rate (group B): {converted_b / nb_b:.1%}
-- Difference in conversion rate: {converted_a / nb_a - converted_b / nb_b:.1%} 
+- Difference in conversion rate: {converted_a / nb_a - converted_b / nb_b:.1%}
+
+
 
 #### Estimation of variability
 - Probability of group A's conversion rate being higher than group B's conversion rate: {(diff > 0).mean():.1%}
 - There is 90% chances that group A's conversion rate minus groupb B's conversion high is higher than {np.percentile(diff, 10):.1f}%
 - There is 95% chances that group A's conversion rate minus groupb B's conversion high is higher than {np.percentile(diff, 5):.1f}%
 - There is 99% chances that group A's conversion rate minus groupb B's conversion high is higher than {np.percentile(diff, 1):.1f}%
-"""
+"""  # noqa: E501
 
 st.markdown(summary)
 st.subheader("Conversion rates by centile")
