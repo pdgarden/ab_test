@@ -1,0 +1,7 @@
+[project]
+name = "ab-test"
+version = "0.1.0"
+description = "Web interface based on streamlit used to estimate variability of AB test on binary outcome, leveraging bayesian statistics."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
